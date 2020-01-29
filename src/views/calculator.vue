@@ -5,7 +5,7 @@
         <v-text-field outlined rounded solo :placeholder="firstCurrency"></v-text-field>
       </v-col>
       <v-col class="d-flex" cols="12" sm="6">
-        <v-select v-model="firstCurrency" :items="items" label="Outlined style" outlined></v-select>
+        <v-select v-model="firstCurrency" @change="fetchDataCurrency" :items="items"  label="Outlined style" outlined></v-select>
       </v-col>
     </v-row>
     <v-row>
@@ -13,46 +13,35 @@
         <v-text-field outlined rounded solo :placeholder="secondCurrency"></v-text-field>
       </v-col>
       <v-col class="d-flex" cols="12" sm="6">
-        <v-select v-model="secondCurrency" :items label="Outlined style" outlined></v-select>
+        <v-select v-model="secondCurrency" @change="fetchDataCurrency" :items="items" label="Outlined style" outlined></v-select>
       </v-col>
     </v-row>
+     <v-btn small @click="fetchDataCurrency">Normal</v-btn>
+     <p>{{datae }}</p>
   </div>
 </template>
 
 <script>
 import CurrencyService from "../services/currencyService";
 export default {
+  props:{
+   datae:[]
+  },
   name: "Calculator",
   data() {
     return {
       firstCurrency: "EUR",
       secondCurrency: "USD",
-      stuff: [
-        {
-          id: 1,
-          description: "Euro",
-          shortCut: "EUR"
-        },
-        {
-          id: 2,
-          description: null,
-          shortCut: "GBP "
-        },
-        {
-          id: 3,
-          description: null,
-          shortCut: "HKD"
-        }
-      ]
-    };
+      items:["CAD", "HKD", "ISK", "PHP"]
+    }
   },
   methods: {
-    fetchData() {
+    fetchDataCurrency() {
       CurrencyService.getCurrencies(
         this.firstCurrency,
         this.secondCurrency
       ).then(Response => {
-        this.data = Response.data;
+        this.datae = Response.data.rates;
       });
     }
   }
