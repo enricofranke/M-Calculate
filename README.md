@@ -1,4 +1,9 @@
-# calcneu
+### This is M-Calculate a software that was set up in the course of my training !
+
+I learned about Vue.js through this project and slowly worked my way into it.
+This project is in no way a standard of my current development work, I have left this project here only for notlgie reasons.
+
+-❌ this project is no longer being developed ❌
 
 ## Project setup
 ```
